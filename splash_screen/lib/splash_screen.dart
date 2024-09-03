@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splash_screen/home_screen.dart';
 import 'package:splash_screen/login_screen.dart';
+import 'package:splash_screen/signup_screen.dart';
+import 'package:splash_screen/student_screen.dart';
+import 'package:splash_screen/teacher_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,8 +21,37 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
 
+    isLogin();
+  }
+
+  void isLogin() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    bool isLoggedIn = sp.getBool('isLoggedIn') ?? false;
+    String type = sp.getString('userType') ?? '';
+
+
+    // if (!isLoggedIn) {
+    //   Timer(const Duration(seconds: 5), (){
+    //     Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+    //   });
+    // }
+
+    if (!isLoggedIn) {
+      Timer(Duration(seconds: 5), (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+      });
+    } else if (type == 'student') {
+      Timer(Duration(seconds: 5), (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => StudentScreen()));
+      });
+    } else if (type == 'teacher') {
+      Timer(Duration(seconds: 5), (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => TeacherScreen()));
+      });
+    }
+
     Timer(Duration(seconds: 5), (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     });
   }
 

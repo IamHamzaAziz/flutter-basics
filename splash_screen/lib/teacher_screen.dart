@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:splash_screen/login_screen.dart';
 import 'package:splash_screen/signup_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TeacherScreen extends StatefulWidget {
+  const TeacherScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TeacherScreen> createState() => _TeacherScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  String email = '', age = '';
+class _TeacherScreenState extends State<TeacherScreen> {
+  String email = '', age = '', type = '';
 
   @override
   void initState() {
@@ -26,17 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
     email = sp.getString('email') ?? '';
     age = sp.getString('age') ?? '';
+    type = sp.getString('userType') ?? '';
 
     setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-        backgroundColor: Colors.teal.shade800,
+        title: Text('Teacher Screen', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.grey.shade800,
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -46,7 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Welcome to Home Screen'),
+            Text('Email: $email'),
+            SizedBox(
+              height: 10,
+            ),
+
+            Text('Age: $age'),
+
+            SizedBox(
+              height: 30,
+            ),
+
+            Text('You are a teacher.', textAlign: TextAlign.center,),
 
             SizedBox(
               height: 20,
@@ -81,3 +91,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
