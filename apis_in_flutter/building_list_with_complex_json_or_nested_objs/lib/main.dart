@@ -1,4 +1,5 @@
 import 'package:building_list_with_complex_json_or_nested_objs/home_screen.dart';
+import 'package:building_list_with_complex_json_or_nested_objs/without_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: WithoutModel(),
     );
   }
 }
